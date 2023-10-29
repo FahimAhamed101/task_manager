@@ -22,10 +22,10 @@ class TaskForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(TaskForm, self).__init__(*args, **kwargs)
         self.fields['title'].widget.attrs['placeholder'] = 'Enter Title'
-        self.fields['description'].widget.attrs['placeholder'] = 'Enter last Name'
+        self.fields['description'].widget.attrs['placeholder'] = 'Enter description'
        
         for field in self.fields:
-            self.fields[field].widget.attrs['class'] = 'text-white'
+            self.fields[field].widget.attrs['class'] = 'text-black'
 
 class ImageForm(forms.ModelForm):
     image = forms.ImageField(

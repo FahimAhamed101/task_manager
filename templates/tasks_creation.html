@@ -18,15 +18,22 @@
               {{ form.description }}
         </div>
         <div class="col form-group">
-            <label>description</label>
+            <label>Complete</label>
               {{ form.completed }}
         </div>
-
+        <div class="col form-group">
+          <label>Complete</label>
+            {{ form.priority }}
+      </div>
           <div class="col form-group">
             <label>description</label>
               {{ form.created_at }}
         </div>
-      <input placeholder="Select your date" type="text" name="checkIn" id="datepicker" value="" class="calendar"><i class="fas fa-calendar-check icon">
+        <div class="col form-group">
+          <label>description</label>
+            {{ form.due_date }}
+      </div>
+   
        
     </div> <!-- form-row end.// -->
 

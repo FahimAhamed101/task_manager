@@ -6,11 +6,43 @@
 <hr>
 <h1>List all Task</h1>
 <div class="new-task-button">
-  <a class="btn btn-primary"  href="">Creat new task</a>
+  <a class="btn btn-primary"  href="{% url 'tasks:create-task' %}">Creat new task</a>
 </div>
  
-                   
-                 
+<div class="row">
+	{% if tasks %}
+  {% for task in tasks %}
+	<div class="col-md-4">
+		<figure class="card card-product-grid">
+			<div class="img-wrap w-50px">
+       
+        {% for i in task.images.all %} 
+      
+          <a href="{{ image.url.get_absolute_url }}">
+   <img src="{{i.image.url}}" style="height:50px;width:50px;" class="card-img-top w-20" alt="{{ tasks.title }} logo">
+     </a>
+
+    
+    {% endfor %}
+			</div> <!-- img-wrap.// -->
+			<figcaption class="info-wrap">
+				<div class="fix-height">
+					<a href="{{ product.get_url }}" class="title">{{ task.title }}</a>
+					<div class="description-wrap mt-2">
+						<span class="description"> {{ task.description}}</span>
+					</div>
+				<a href="{% url 'tasks:task' task.id %}" class="btn btn-block btn-primary">View Details </a>
+			</figcaption>
+		</figure>
+	</div> <!-- col.// -->
+	{% endfor %}
+	{% else %}
+	<div>
+		<h2>No result found. Please try again.</h2>
+	</div>
+	{% endif %}
+</div>             
+    
                    
      
 

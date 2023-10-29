@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView, FormView
-
+from django.views.generic.detail import DetailView
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth import login
@@ -80,7 +80,23 @@ class ListTasks(ListView):
         context = super().get_context_data(**kwarg)
         
         return context
-    
+
+class DetailTask(DetailView):
+    template_name = "task_detail.html"
+    model = Tasks
+    context_object_name = 'tasks'
+    success_url = reverse_lazy('tasks:pk')
+    def get_context_data(self, *args, **kwargs):
+        context = super(DetailTask, self).get_context_data(*args, **kwargs)
+        print(context)
+        return context
+
+    def get_object(self, *args, **kwargs):
+        pk = self.kwargs.get('pk')
+        instance = Tasks.objects.get(pk=pk)
+        if instance is None:
+            raise Http404("tasks not exists")
+        return instance
     
 class CreatTask(CreateView):
     
@@ -122,7 +138,7 @@ class CreatTask(CreateView):
                     print(files)
                     if form.is_valid():
                         f = form.save(commit=False)
-                        f.user = User.objects.create() 
+                       # f.user = User.objects.create() 
                         f.save()
                         for i in files:
                             Image.objects.create(tasks=f, image=i)

@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<a href="{% url 'tasks:tasks' %}">Home</a>
+<div class="container">
+<div class='row'>
+	
+		<div class='col'>
+		<div class="card" style="width: 18rem;">
+	
+      <div class="container text-center">
+        <div class="row align-items-start">
+         {% for i in tasks.images.all %} 
+         <div class="col">  <a href="{{ image.url.get_absolute_url }}">
+    <img src="{{i.image.url}}" style="height:100px;" class="card-img-top w-30" alt="{{ tasks.title }} logo">
+      </a>
+           
+          </div>
+    
+	  	{% endfor %}
+         
+        </div>
+      </div>
+	
+    
+    <div class="card-body">
+      <h5 class="card-title">Title:{{ tasks.title }}</h5>
+	  
+      <p class="card-text">description : {{tasks.description }}</p>
+      
+      
+
+    </div>
+  </div>
+
+
+
+			   
+			
+			  </div>
+		
+
+</div>
+
+
+</div>
+
+
+{% endblock content %}
+
+
+
+
+
+   
+									ail.html
