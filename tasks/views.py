@@ -13,6 +13,12 @@ from django.views.generic.list import ListView
 from .forms import TaskForm,ImageForm,UserRegisterForm
 # Create your views here.
 from django.db.models import Q
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from rest_framework import generics, status
+from .serializers import *
+
+
 def RegisterView(request):
     if request.method == "POST":
         form = UserRegisterForm(request.POST)
@@ -208,3 +214,18 @@ class DeleteTask(DeleteView):
         task_count = task.count()
         context['task_count'] = task_count
         return context
+    
+    
+    
+class ListTasksapi(generics.ListAPIView):
+    
+    queryset = Tasks.objects.all().order_by('-created_at')
+    
+    serializer_class = TasksListSerializer
+    
+
+    def get(self, request):
+        
+        tasks = self.queryset.all()
+        serializer = TasksListSerializer(tasks, many=True, context={'request': request})
+        return Response(serializer.data,status=status.HTTP_200_OK)

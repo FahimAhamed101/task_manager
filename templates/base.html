@@ -12,28 +12,31 @@
 <body> 
 
     <div class="container">
-      <div class="text-end pb-5">
-  {% if request.user.is_authenticated %}
-  
-
-
-
-
-  <p>{{ request.user }}</p>
-  <a href="{% url 'sign-out' %}" class="btn btn-danger">Logout</a>
-  {% else %}
-  <a href="{% url 'sign-in' %}" class="btn btn-primary " >Login</a>
-  {% endif %}
-</div>
+   
   
 
         <!-- Task Area -->
       
       
-          <div class="my-name">
-            <h2>Hello, </h2>
-         <p>Would you like to create a Task</p>
+          <div class="my-name">  
+          
+         
          <div class="sider">
+          <div class="text-end pt-5">
+             
+            {% if request.user.is_authenticated %}
+            
+          
+          
+          
+          
+            <h2>Hello,<p>{{ request.user }}</p> </h2> 
+            <a href="{% url 'sign-out' %}" class="btn btn-danger">Logout</a>
+            {% else %}
+            <h2>Hello, </h2>
+            <a href="{% url 'sign-in' %}" class="btn btn-primary " >Login</a>
+            {% endif %}
+          </div>
           <a href="{% url 'tasks:tasks' %}">Home</a>
           <hr>
           <div class="new-task-button">
