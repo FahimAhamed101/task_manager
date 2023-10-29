@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+<div class="task-manager">
+{% block content %}
+<a href="{% url 'tasks:tasks' %}">Home</a>
+<h1>Register</h1>
+
+<form method="POST">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" value="Register">
+    <p>Already have an account? <a href="{% url 'login' %}">Login</a> </p>
+</form>
+{% endblock content %}

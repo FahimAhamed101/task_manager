@@ -11,7 +11,19 @@
 </head>
 <body>
     <div class="container">
+<div class="text-end">
+  {% if request.user.is_authenticated %}
+  
 
+
+
+
+  <p>{{ request.user }}</p>
+  <a href="{% url 'sign-out' %}" class="btn btn-danger">Logout</a>
+  {% else %}
+  <a href="{% url 'sign-in' %}" class="btn btn-primary " >Login</a>
+  {% endif %}
+</div>
         <!-- Task Area -->
         <div class="sider">
           <div class="dots">
@@ -21,8 +33,8 @@
           </div>
       
           <div class="my-name">
-            <h2>Hello, Appy</h2>
-         
+            <h2>Hello, </h2>
+         <p>Would you like to create a Task</p>
           </div>
       
       

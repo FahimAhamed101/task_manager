@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Tasks,Image
+from .models import Tasks,Image,User
 # Register your models here.
 class TasksAdmin(admin.ModelAdmin):
     list_display = ['id', 'title', 'description','completed','priority','due_date','created_at']
@@ -12,3 +12,4 @@ class TasksAdmin(admin.ModelAdmin):
 
 admin.site.register(Tasks,TasksAdmin)
 admin.site.register(Image)
+admin.site.register(User)

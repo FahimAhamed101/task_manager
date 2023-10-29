@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+<div class="task-manager">
+{% block content %}
+
+<h1> Create Tasks</h1>
+<a href="{% url 'tasks:tasks' %}">Home</a>
+<form method='POST' action="" enctype="multipart/form-data">
+ 
+    {% csrf_token %}
+
+    <div class="form-row">
+        <div class="col form-group">
+            <label>Title</label>
+               {{form.title}}
+        </div> <!-- form-group end.// -->
+        <div class="col form-group">
+            <label>description</label>
+              {{ form.description }}
+        </div>
+        <div class="col form-group">
+            <label>description</label>
+              {{ form.completed }}
+        </div>
+
+          <div class="col form-group">
+            <label>description</label>
+              {{ form.created_at }}
+        </div>
+      <input placeholder="Select your date" type="text" name="checkIn" id="datepicker" value="" class="calendar"><i class="fas fa-calendar-check icon">
+       
+    </div> <!-- form-row end.// -->
+
+
+ 
+
+  
+    <input required name="image" type="file" multiple class="form-control-file">
+  
+    <input type="submit" class="btn btn-primary" value="Create">
+</form>
+{% endblock content %}
