@@ -229,3 +229,37 @@ class ListTasksapi(generics.ListAPIView):
         tasks = self.queryset.all()
         serializer = TasksListSerializer(tasks, many=True, context={'request': request})
         return Response(serializer.data,status=status.HTTP_200_OK)
+    
+    
+class CreateListTasksapi(generics.ListCreateAPIView):
+    
+    
+    queryset = Tasks.objects.all()
+    
+    serializer_class = TasksCreateSerializer
+    
+   
+class UpadateListTasksapi(generics.UpdateAPIView):
+    
+    def get_object(self, *args, **kwargs):
+        pk = self.kwargs.get('pk')
+        instance = Tasks.objects.get(pk=pk)
+        if instance is None:
+            raise Http404("tasks not exists")
+        return instance
+    
+    queryset = Tasks.objects.all()
+    
+    serializer_class = TasksUpdateSerializer
+    
+class DeleteListTasksapi(generics.DestroyAPIView):
+    
+    def get_object(self, *args, **kwargs):
+        pk = self.kwargs.get('pk')
+        instance = Tasks.objects.get(pk=pk)
+        if instance is None:
+            raise Http404("tasks not exists")
+        return instance
+    queryset = Tasks.objects.all()
+    
+    serializer_class = TasksUpdateSerializer

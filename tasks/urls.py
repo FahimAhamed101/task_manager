@@ -1,5 +1,5 @@
 from django.urls import path,include
-from .views import ListTasks,CreatTask,DetailTask,EditTask,DeleteTask,ListTasksapi
+from .views import *
 app_name = "tasks"
 urlpatterns = [path('', ListTasks.as_view(), name='tasks'),
                   path('create-task/',CreatTask.as_view(), name='create-task'),
@@ -8,4 +8,7 @@ urlpatterns = [path('', ListTasks.as_view(), name='tasks'),
                
                  path('delete-task/<int:pk>',DeleteTask.as_view(), name='delete-task'),
                  path('api/',ListTasksapi.as_view(), name='tasksapi'),
+                 path('api/create/',CreateListTasksapi.as_view(), name='taskscreate'),
+                 path('api/update/<int:pk>',UpadateListTasksapi.as_view(), name='tasksupdate'),
+                 path('api/delete/<int:pk>',DeleteListTasksapi.as_view(), name='tasksdelete'),
               ]
