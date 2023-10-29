@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    
+    <title>Task manager</title>
+    <link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Audiowide">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <div class="container">
+
+        <!-- Task Area -->
+        <div class="sider">
+          <div class="dots">
+            <div class="dot1"></div>
+            <div class="dot2"></div>
+            <div class="dot3"></div>
+          </div>
+      
+          <div class="my-name">
+            <h2>Hello, Appy</h2>
+         
+          </div>
+      
+      
+          <div class="uppertaskarea">
+            <div class="taskarea">
+      
+ {% block content %}
+
+{% endblock content %}
+      
+         
+      
+            </div>
+          </div>
+      
+          
+        </div>
+      </div>
+
+
+</div>
+
+
+</body>
+</html>
