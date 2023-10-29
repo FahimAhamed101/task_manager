@@ -9,9 +9,10 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Audiowide">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 </head>
-<body>
+<body> 
+
     <div class="container">
-<div class="text-end">
+      <div class="text-end pb-5">
   {% if request.user.is_authenticated %}
   
 
@@ -24,17 +25,27 @@
   <a href="{% url 'sign-in' %}" class="btn btn-primary " >Login</a>
   {% endif %}
 </div>
+  
+
         <!-- Task Area -->
-        <div class="sider">
-          <div class="dots">
-            <div class="dot1"></div>
-            <div class="dot2"></div>
-            <div class="dot3"></div>
-          </div>
+      
       
           <div class="my-name">
             <h2>Hello, </h2>
          <p>Would you like to create a Task</p>
+         <div class="sider">
+          <a href="{% url 'tasks:tasks' %}">Home</a>
+          <hr>
+          <div class="new-task-button">
+            <a class="btn btn-primary"  href="{% url 'tasks:create-task' %}">Creat new task</a>
+          </div>
+          <div class="incomplete-task-up">
+            <div class="incomplete-task">
+          
+              <p>You have {{task_count}} <span style="color: #FFBD44;">Incompleted</span> Tasks :(</p>
+          
+            </div>
+          </div>
           </div>
       
           <div class="uppertaskarea">

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+<div class="task-manager">
+{% block content %}
+<h1>Delete the task</h1>
+<a href="{% url 'tasks:tasks' %}">Home</a>
+{% for i in tasks.images.all %} 
+    <div class="col">  <a href="{{ image.url.get_absolute_url }}">
+<img src="{{i.image.url}}" style="height:30px; width:30px; " class="card-img-top w-30" alt="{{ tasks.title }} logo">
+ </a>
+      
+     </div>
+
+     {% endfor %}
+     <div class="card-body">
+        <h5 class="card-title">Title:{{ tasks.title }}</h5>
+        
+        <p class="card-text">description : {{tasks.description }}</p>
+        
+        
+  
+      </div>
+<form method="POST">
+    {% csrf_token %}
+    <p>Delete this task? : "{{tasks}}"</p>
+    <input type="submit" value="Delete">
+
+</form>
+{% endblock content %}

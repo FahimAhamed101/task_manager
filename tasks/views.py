@@ -12,7 +12,7 @@ from .models import User
 from django.views.generic.list import ListView
 from .forms import TaskForm,ImageForm,UserRegisterForm
 # Create your views here.
-
+from django.db.models import Q
 def RegisterView(request):
     if request.method == "POST":
         form = UserRegisterForm(request.POST)
@@ -78,19 +78,43 @@ class ListTasks(ListView):
     template_name = "task_list.html"
     def get_context_data(self,**kwarg):
         context = super().get_context_data(**kwarg)
-        
+        date = self.request.GET.get('date') or ''
+        boolean = self.request.GET.get('boolean') or ''
+        print(boolean)
+        task = Tasks.objects.all().filter(completed=False)
+        task_count = task.count()
+        context['task_count'] = task_count
+        due_date = self.request.GET.get('due_date') or ''
+        searchedvalue = self.request.GET.get('value') or ''
+        if boolean:
+            context['tasks'] = context['tasks'].filter(completed=True)
+            context['boolean'] = boolean
+        if date:
+            context['tasks'] = context['tasks'].filter(Q(created_at__icontains=date))
+            context['date'] = date
+        if due_date:
+            context['tasks'] = context['tasks'].filter(Q(due_date__icontains=due_date))
+            context['due_date'] = due_date
+        if searchedvalue:
+            context['tasks'] = context['tasks'].filter(Q(description__icontains=searchedvalue) | Q(title__icontains=searchedvalue))
+            context['searchedvalue'] = searchedvalue
         return context
 
 class DetailTask(DetailView):
+    
     template_name = "task_detail.html"
     model = Tasks
     context_object_name = 'tasks'
     success_url = reverse_lazy('tasks:pk')
+   
     def get_context_data(self, *args, **kwargs):
         context = super(DetailTask, self).get_context_data(*args, **kwargs)
+        task = Tasks.objects.all().filter(completed=False)
+        task_count = task.count()
+        context['task_count'] = task_count
         print(context)
         return context
-
+        
     def get_object(self, *args, **kwargs):
         pk = self.kwargs.get('pk')
         instance = Tasks.objects.get(pk=pk)
@@ -159,3 +183,28 @@ class CreatTask(CreateView):
         return super(CreatTask, self).form_valid(form)
     
     
+class EditTask(UpdateView):
+    model = Tasks
+    form_class = TaskForm
+    success_url = reverse_lazy('tasks:tasks')
+    template_name = "task_update.html"
+    
+    def get_context_data(self,**kwarg):
+        context = super().get_context_data(**kwarg)
+        task = Tasks.objects.all().filter(completed=False)
+        task_count = task.count()
+        context['task_count'] = task_count
+        return context
+
+class DeleteTask(DeleteView):
+    model = Tasks
+    template_name = "task_delete.html"
+    context_object_name = 'tasks'
+    success_url = reverse_lazy('tasks:tasks')
+    
+    def get_context_data(self,**kwarg):
+        context = super().get_context_data(**kwarg)
+        task = Tasks.objects.all().filter(completed=False)
+        task_count = task.count()
+        context['task_count'] = task_count
+        return context

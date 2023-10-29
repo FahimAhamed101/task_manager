@@ -1,19 +1,29 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="task-manager">
-<a href="{% url 'tasks:tasks' %}">Home</a>
-<hr>
-<h1>List all Task</h1>
-<div class="new-task-button">
-  <a class="btn btn-primary"  href="{% url 'tasks:create-task' %}">Creat new task</a>
-</div>
+
+
+<form method="GET" class="pb-5">
+  <div class="input-group gap-5">
+      <input class="form-control" type="text" placeholder="Search" name="value" aria-label="Search" value="{{searchedvalue}}">
+      
+  
+      <input type="date" name="date" placeholder="Date" class="form-control datepicker">
+     <span class="input-group-btn">
+         completed <input type="checkbox" name="boolean"  >
+      
+      </span>  <input type="date" name="due_date" placeholder="due_Date" class="form-control datepicker ">
+       <button class="btn btn-outline-success"  value="value" type="submit">Search</button>
+    </div>
+
+
+</form>  
  
 <div class="row">
 	{% if tasks %}
   {% for task in tasks %}
 	<div class="col-md-4">
-		<figure class="card card-product-grid">
+		<figure class="card text-center card-product-grid">
 			<div class="img-wrap w-50px">
        
         {% for i in task.images.all %} 
@@ -25,14 +35,19 @@
     
     {% endfor %}
 			</div> <!-- img-wrap.// -->
-			<figcaption class="info-wrap">
+			<figcaption class="info-wrap ">
 				<div class="fix-height">
 					<a href="{{ product.get_url }}" class="title">{{ task.title }}</a>
 					<div class="description-wrap mt-2">
 						<span class="description"> {{ task.description}}</span>
 					</div>
 				<a href="{% url 'tasks:task' task.id %}" class="btn btn-block btn-primary">View Details </a>
-			</figcaption>
+        <a href="{% url 'tasks:delete-task' task.id %}" class="btn btn-danger text-white" >     <i class="fas fa-times-circle"></i>Delete</a>
+   
+        <a class="btn btn-primary"
+                             href="{% url 'tasks:edit-task' task.id %}">Edit</a>
+      
+      </figcaption>
 		</figure>
 	</div> <!-- col.// -->
 	{% endfor %}

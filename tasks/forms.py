@@ -23,7 +23,7 @@ class TaskForm(forms.ModelForm):
         super(TaskForm, self).__init__(*args, **kwargs)
         self.fields['title'].widget.attrs['placeholder'] = 'Enter Title'
         self.fields['description'].widget.attrs['placeholder'] = 'Enter description'
-       
+        self.fields['due_date'].widget.attrs['placeholder'] = 'Enter description'
         for field in self.fields:
             self.fields[field].widget.attrs['class'] = 'text-black'
 

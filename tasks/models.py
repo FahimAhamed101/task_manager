@@ -69,7 +69,7 @@ class Tasks(models.Model):
     description= models.TextField(null=True,
                                blank=True)
     
-    due_date = models.DateField(blank=True, null=True)
+    due_date = models.DateTimeField(default=timezone.now)
     priority = models.IntegerField(choices=((1, 'Low'), (2, 'Medium'), (3, 'High')), default=1)
     completed = models.BooleanField(default=False)
     created_at = models.DateTimeField(default=timezone.now)
