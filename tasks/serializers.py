@@ -82,10 +82,7 @@ class TasksCreateSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         images = validated_data.pop('images', None)
-        title = validated_data.pop('title', None)
-        completed = validated_data.pop('completed', None)
-        priority = validated_data.pop('priority', None)
-        due_date = validated_data.pop('due_date', None)
+       
         tasks = super(TasksCreateSerializer, self).create(validated_data)
 
         # Images and variants are approved as default since this is initial create
@@ -143,26 +140,15 @@ class TasksUpdateSerializer(serializers.ModelSerializer):
         return data
 
     def patch(self, instance, validated_data):
-        
+       
         
 
         new_images_serializer = validated_data.pop('new_images_serializer', None)
         if new_images_serializer:
             new_images_serializer.save()
 
-       
+        
         
 
         return instance
-    def put(self, instance, validated_data):
-        
-        
-
-        new_images_serializer = validated_data.pop('new_images_serializer', None)
-        if new_images_serializer:
-            new_images_serializer.save()
-
-       
-        
-
-        return instance
+    
