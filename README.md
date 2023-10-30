@@ -104,9 +104,9 @@ or from source...
 
 .. code:: sh
 
-    $ git clone https://github.com/django-json-api/django-rest-framework-json-api.git
-    $ cd django-rest-framework-json-api
-    $ pip install -e .
+    $ git clone https://github.com/FahimAhamed101/task_manager.git
+    $ cd task_manager
+    $ pip install -r requirements.txt .
 
 
 
@@ -114,17 +114,9 @@ or from source...
 Running the example app
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-It is recommended to create a virtualenv for testing. Assuming it is already
-installed and activated:
+It is recommended to create a virtualenv for testing.
 
-.. code:: sh
 
-    $ git clone https://github.com/django-json-api/django-rest-framework-json-api.git
-    $ cd django-rest-framework-json-api
-    $ pip install -Ur requirements.txt
-    $ django-admin migrate --settings=example.settings
-    $ django-admin loaddata drf_example --settings=example.settings
-    $ django-admin runserver --settings=example.settings
 
 Browse to
 

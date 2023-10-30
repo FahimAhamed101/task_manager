@@ -52,6 +52,7 @@ class User(AbstractBaseUser):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']
     objects = MyAccountManager()
+    
     class Meta:
         app_label = 'tasks'
     def __str__(self):
